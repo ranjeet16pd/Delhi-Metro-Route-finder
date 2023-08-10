@@ -111,15 +111,11 @@ front()
 }
 }
 function find_paths(paths,path,parent,n,u){
-   
     if(u===-1){
-    
         paths.push(path)
-        
         return
     }
     for(i=0;i<parent[u].length;i++){
-        
         path.push(u)
         find_paths(paths,path,parent,n,parent[u][i])
         // path.pop()
@@ -130,17 +126,13 @@ function bfs(adj,parent,n,s){
     for (let i = 0;i<n;i++){
         dist[i] = Number.POSITIVE_INFINITY
     }
-    
     q =new Queue()
     q.enqueue(s)
     parent[s] = [-1]
     dist[s] = 0
     while(q.isEmpty() === false){
-        
         let u = q.dequeue()
         for(let i = 0;i<adj[u].length;i++){
-       
-            
             if(dist[adj[u][i]] > dist[u]+1){
                 dist[adj[u][i]] = dist[u] + 1
                 q.enqueue(adj[u][i])
@@ -154,7 +146,6 @@ function bfs(adj,parent,n,s){
     }
 }
 function print_paths(adj,n,s,e){
-
     let paths = []
     let path  = []
     let parent = new Array(n)
@@ -162,7 +153,6 @@ function print_paths(adj,n,s,e){
         parent[i] = []
     }
     bfs(adj,parent,n,s)
-    
     find_paths(paths,path,parent,n,e)
     
     for (let v in paths){
@@ -172,24 +162,15 @@ function print_paths(adj,n,s,e){
 }
 
 app.get('/',(req,res)=>{
-  
-
   fs.readFile('./station.json','utf-8',(err,arr)=>{
     const station = JSON.parse(arr)
-  
     let ans3 = []
     let ans2  = []
     l = 0
     to = 0
     from = 0
-   
   res.render('home',{ans3,station,l,ans2,to,from})
-  })
-
-  
-    
-    
-    
+  })    
 })
 
 
